@@ -1,28 +1,33 @@
-global a
-global b
-
-
 class BankAccount:
     def __init__(self, account_number, balance=0):
         self.account_number = account_number
         self.balance = balance
 
-    def deposit(self,a=0):
-        a=int(input("Скіки на карточку закинути?"))
-        self.balance += a
-    def withdraw(self,b=0):
-        b=int(input('Скіки зняти з карточки?'))
-        if b<=a:
-            balance=b-a
-            print('Тепер в тебе на карточці ', balance, 'грн')
+    def deposit(self, amount):
+
+        if amount > 0:
+            self.balance += amount
+            print(f"Рахунок {self.account_number} поповнено на {amount}. Новий баланс: {self.balance}")
         else:
-            print('Недостатньо коштів')
+            print("На карточку тре закинути к-сть грошей більше за 0")
 
-anton=BankAccount('123123', 0)
+    def withdraw(self, amount):
 
-anton.deposit(200)
-anton.withdraw(100)
-anton.withdraw(200)
+        if amount <= 0:
+            print("З карточки тре знімати к-сть грошей більше за 0")
+            return False
+
+        if self.balance >= amount:
+            self.balance -= amount
+            print(f"З рахунку {self.account_number} знято {amount}. Залишок на рахунку: {self.balance}")
+            return True
+        else:
+            print(
+                f"Помилка: недостатньо коштів на рахунку {self.account_number}! Доступно: {self.balance}, а потрібно: {amount}")
+            return False
+
+
+
 
 
 
